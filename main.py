@@ -1,4 +1,4 @@
-⁸import asyncio
+import asyncio
 import logging
 from datetime import datetime, timedelta
 from aiogram import Bot, Dispatcher, types, F
