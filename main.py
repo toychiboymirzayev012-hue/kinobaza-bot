@@ -1,4 +1,4 @@
-import asyncio
+⁸import asyncio
 import logging
 from datetime import datetime, timedelta
 from aiogram import Bot, Dispatcher, types, F
@@ -325,6 +325,26 @@ async def main():
     await init_db()
     print("Bot muvaffaqiyatli ishga tushdi!")
     await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+from aiohttp import web
+
+async def handle(request):
+    return web.Response(text="Bot is running!")
+
+async def web_server():
+    app = web.Application()
+    app.router.add_get("/", handle)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", 10000)
+    await site.start()
+
+async def main():
+    await init_db()
+    # Veb-serverni hamda bot polling jarayonini birga ishga tushiramiz:
+    await asyncio.gather(web_server(), dp.start_polling(bot))
 
 if __name__ == "__main__":
     asyncio.run(main())
